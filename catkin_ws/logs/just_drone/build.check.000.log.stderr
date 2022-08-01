@@ -1,0 +1,11 @@
+[33m[1mCMake Warning[0m at /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/cmake/just_drone-genmsg.cmake:3 (message):
+  Invoking generate_messages() without having added any message or service
+  file before.
+
+  You should either add add_message_files() and/or add_service_files() calls
+  or remove the invocation of generate_messages().
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/noetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:71 (generate_messages)
+
+

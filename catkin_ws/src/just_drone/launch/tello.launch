@@ -1,0 +1,6 @@
+<launch>
+  <node name="startup" pkg="just_drone" type="startup.py" output="screen" />
+  <node name="driver" pkg="just_drone" type="driver.py" output="screen" />
+  <node name="hand" pkg="just_drone" type="hand.py" output="screen" />
+  <node name="tv" pkg="just_drone" type="tv.py" output="screen" />
+</launch>

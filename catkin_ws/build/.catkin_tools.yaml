@@ -1,0 +1,6 @@
+devel_space: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel
+install: false
+install_space: /home/adavid28/BWSI-Tello-Project/catkin_ws/install
+profile: default
+source_space: /home/adavid28/BWSI-Tello-Project/catkin_ws/src
+workspace: /home/adavid28/BWSI-Tello-Project/catkin_ws
