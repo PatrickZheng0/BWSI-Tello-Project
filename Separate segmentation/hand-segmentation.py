@@ -199,6 +199,8 @@ if __name__ == "__main__":
                     tello.land()
                     space = True
                     break
+            if event.type == pygame.QUIT:
+                pygame.quit()
         if space:
             break
 
