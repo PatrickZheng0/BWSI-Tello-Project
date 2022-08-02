@@ -5,5 +5,6 @@
 ;;  FROM /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/./package.xml (0.0.0)
 ;; USING /opt/ros/noetic/lib/python3/dist-packages/geneus/geneus_main.py /opt/ros/noetic/share/geneus/package.xml (3.0.0)
 ;;
+(ros::load-ros-package "just_drone")
 (ros::load-ros-package "std_msgs")
 (ros::load-ros-package "just_drone")

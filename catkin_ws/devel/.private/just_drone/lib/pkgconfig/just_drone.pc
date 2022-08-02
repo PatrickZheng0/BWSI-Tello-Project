@@ -3,6 +3,6 @@ prefix=/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone
 Name: just_drone
 Description: Description of just_drone
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/include
 Libs: -L${prefix}/lib 
-Requires: 
+Requires: message_runtime

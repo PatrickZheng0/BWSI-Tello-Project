@@ -56,6 +56,39 @@ CMAKE_BINARY_DIR = /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -102,39 +135,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles/progress.marks
@@ -166,6 +166,123 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named just_drone_genpy
+
+# Build rule for target.
+just_drone_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_genpy
+.PHONY : just_drone_genpy
+
+# fast build rule for target.
+just_drone_genpy/fast:
+	$(MAKE) -f CMakeFiles/just_drone_genpy.dir/build.make CMakeFiles/just_drone_genpy.dir/build
+.PHONY : just_drone_genpy/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_gennodejs
+
+# Build rule for target.
+just_drone_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_gennodejs
+.PHONY : just_drone_gennodejs
+
+# fast build rule for target.
+just_drone_gennodejs/fast:
+	$(MAKE) -f CMakeFiles/just_drone_gennodejs.dir/build.make CMakeFiles/just_drone_gennodejs.dir/build
+.PHONY : just_drone_gennodejs/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_generate_messages_nodejs
+
+# Build rule for target.
+just_drone_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_generate_messages_nodejs
+.PHONY : just_drone_generate_messages_nodejs
+
+# fast build rule for target.
+just_drone_generate_messages_nodejs/fast:
+	$(MAKE) -f CMakeFiles/just_drone_generate_messages_nodejs.dir/build.make CMakeFiles/just_drone_generate_messages_nodejs.dir/build
+.PHONY : just_drone_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_genlisp
+
+# Build rule for target.
+just_drone_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_genlisp
+.PHONY : just_drone_genlisp
+
+# fast build rule for target.
+just_drone_genlisp/fast:
+	$(MAKE) -f CMakeFiles/just_drone_genlisp.dir/build.make CMakeFiles/just_drone_genlisp.dir/build
+.PHONY : just_drone_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_geneus
+
+# Build rule for target.
+just_drone_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_geneus
+.PHONY : just_drone_geneus
+
+# fast build rule for target.
+just_drone_geneus/fast:
+	$(MAKE) -f CMakeFiles/just_drone_geneus.dir/build.make CMakeFiles/just_drone_geneus.dir/build
+.PHONY : just_drone_geneus/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_generate_messages_eus
+
+# Build rule for target.
+just_drone_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_generate_messages_eus
+.PHONY : just_drone_generate_messages_eus
+
+# fast build rule for target.
+just_drone_generate_messages_eus/fast:
+	$(MAKE) -f CMakeFiles/just_drone_generate_messages_eus.dir/build.make CMakeFiles/just_drone_generate_messages_eus.dir/build
+.PHONY : just_drone_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_gencpp
+
+# Build rule for target.
+just_drone_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_gencpp
+.PHONY : just_drone_gencpp
+
+# fast build rule for target.
+just_drone_gencpp/fast:
+	$(MAKE) -f CMakeFiles/just_drone_gencpp.dir/build.make CMakeFiles/just_drone_gencpp.dir/build
+.PHONY : just_drone_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_generate_messages_lisp
+
+# Build rule for target.
+just_drone_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_generate_messages_lisp
+.PHONY : just_drone_generate_messages_lisp
+
+# fast build rule for target.
+just_drone_generate_messages_lisp/fast:
+	$(MAKE) -f CMakeFiles/just_drone_generate_messages_lisp.dir/build.make CMakeFiles/just_drone_generate_messages_lisp.dir/build
+.PHONY : just_drone_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named _just_drone_generate_messages_check_deps_dimensions
+
+# Build rule for target.
+_just_drone_generate_messages_check_deps_dimensions: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _just_drone_generate_messages_check_deps_dimensions
+.PHONY : _just_drone_generate_messages_check_deps_dimensions
+
+# fast build rule for target.
+_just_drone_generate_messages_check_deps_dimensions/fast:
+	$(MAKE) -f CMakeFiles/_just_drone_generate_messages_check_deps_dimensions.dir/build.make CMakeFiles/_just_drone_generate_messages_check_deps_dimensions.dir/build
+.PHONY : _just_drone_generate_messages_check_deps_dimensions/fast
 
 #=============================================================================
 # Target rules for targets named tests
@@ -246,6 +363,32 @@ std_msgs_generate_messages_eus/fast:
 .PHONY : std_msgs_generate_messages_eus/fast
 
 #=============================================================================
+# Target rules for targets named just_drone_generate_messages_py
+
+# Build rule for target.
+just_drone_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_generate_messages_py
+.PHONY : just_drone_generate_messages_py
+
+# fast build rule for target.
+just_drone_generate_messages_py/fast:
+	$(MAKE) -f CMakeFiles/just_drone_generate_messages_py.dir/build.make CMakeFiles/just_drone_generate_messages_py.dir/build
+.PHONY : just_drone_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_generate_messages
+
+# Build rule for target.
+just_drone_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_generate_messages
+.PHONY : just_drone_generate_messages
+
+# fast build rule for target.
+just_drone_generate_messages/fast:
+	$(MAKE) -f CMakeFiles/just_drone_generate_messages.dir/build.make CMakeFiles/just_drone_generate_messages.dir/build
+.PHONY : just_drone_generate_messages/fast
+
+#=============================================================================
 # Target rules for targets named run_tests
 
 # Build rule for target.
@@ -296,6 +439,19 @@ std_msgs_generate_messages_py: cmake_check_build_system
 std_msgs_generate_messages_py/fast:
 	$(MAKE) -f CMakeFiles/std_msgs_generate_messages_py.dir/build.make CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named just_drone_generate_messages_cpp
+
+# Build rule for target.
+just_drone_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 just_drone_generate_messages_cpp
+.PHONY : just_drone_generate_messages_cpp
+
+# fast build rule for target.
+just_drone_generate_messages_cpp/fast:
+	$(MAKE) -f CMakeFiles/just_drone_generate_messages_cpp.dir/build.make CMakeFiles/just_drone_generate_messages_cpp.dir/build
+.PHONY : just_drone_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named gmock_main
@@ -355,7 +511,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... test"
+	@echo "... just_drone_genpy"
+	@echo "... just_drone_gennodejs"
+	@echo "... just_drone_generate_messages_nodejs"
+	@echo "... just_drone_genlisp"
+	@echo "... just_drone_geneus"
+	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... just_drone_generate_messages_eus"
+	@echo "... just_drone_gencpp"
 	@echo "... install/local"
+	@echo "... just_drone_generate_messages_lisp"
+	@echo "... _just_drone_generate_messages_check_deps_dimensions"
 	@echo "... tests"
 	@echo "... clean_test_results"
 	@echo "... download_extra_data"
@@ -364,14 +532,14 @@ help:
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... install"
 	@echo "... std_msgs_generate_messages_eus"
+	@echo "... just_drone_generate_messages_py"
+	@echo "... just_drone_generate_messages"
 	@echo "... list_install_components"
 	@echo "... run_tests"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
-	@echo "... test"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
+	@echo "... just_drone_generate_messages_cpp"
 	@echo "... gmock_main"
 	@echo "... gmock"
 	@echo "... gtest_main"

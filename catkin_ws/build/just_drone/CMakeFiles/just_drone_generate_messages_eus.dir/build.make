@@ -53,14 +53,21 @@ CMAKE_BINARY_DIR = /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone
 # Include the progress variables for this target.
 include CMakeFiles/just_drone_generate_messages_eus.dir/progress.make
 
+CMakeFiles/just_drone_generate_messages_eus: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/msg/dimensions.l
 CMakeFiles/just_drone_generate_messages_eus: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/manifest.l
 
 
+/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/msg/dimensions.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/msg/dimensions.l: /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/dimensions.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from just_drone/dimensions.msg"
+	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/dimensions.msg -Ijust_drone:/home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ijust_drone:/home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg -p just_drone -o /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/msg
+
 /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for just_drone"
-	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone just_drone std_msgs
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp manifest code for just_drone"
+	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone just_drone std_msgs just_drone
 
 just_drone_generate_messages_eus: CMakeFiles/just_drone_generate_messages_eus
+just_drone_generate_messages_eus: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/msg/dimensions.l
 just_drone_generate_messages_eus: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/manifest.l
 just_drone_generate_messages_eus: CMakeFiles/just_drone_generate_messages_eus.dir/build.make
 

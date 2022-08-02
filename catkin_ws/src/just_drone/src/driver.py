@@ -7,30 +7,23 @@ from geometry_msgs.msg import Twist
 from djitellopy import Tello
 import cv2
 from cv_bridge import CvBridge, CvBridgeError # for converting from cv2 to ros image
-import pygame # for emergency land
+from just_drone.msg import dimensions
+import time
 
 
 class Driver:
     def __init__(self):
         rospy.init_node('driver', anonymous=True)
 
-        # initialize tello
-        self.tello = Tello()
-        self.tello.connect()
-        cam_direction = Tello.CAMERA_FORWARD
-        self.tello.set_video_direction(cam_direction)
-        self.tello.streamon()
-        self.getFrame = driver.tello.get_frame_read()
-        
-
         # initialize other variables
         self.bridge = CvBridge()
         self.hand_cmd = (0,0,0,0)
         self.tv_cmd = (0,0,0,0)
+        self.start = False
 
         # initialize publishers and subscribers
         self.cam_publisher = rospy.Publisher('tello/camera', Image, queue_size=10)
-        self.start_subscriber = rospy.Subscriber('tello/start', Empty, self.start_callback)
+        self.start_subscriber = rospy.Subscriber('tello/start', dimensions, self.start_callback)
         self.land_subscriber = rospy.Subscriber('tello/land', Empty, self.land_callback)
         self.hand_subscriber = rospy.Subscriber('tello/hand_cmd', Twist, self.hand_callback)
         self.tv_subscriber = rospy.Subscriber('tello/tv_cmd', Twist, self.tv_callback)
@@ -47,7 +40,7 @@ class Driver:
             rospy.logerr(e)
 
     def start_callback(self, data):
-        pass
+        self.start = True
 
     def land_callback(self, data):
         pass
@@ -58,14 +51,28 @@ class Driver:
     def tv_callback(self, data):
         pass
 
+    def init_tello(self):
+        self.tello = Tello()
+        self.tello.connect()
+        cam_direction = Tello.CAMERA_FORWARD
+        self.tello.set_video_direction(cam_direction)
+        self.tello.streamon()
+        self.getFrame = self.tello.get_frame_read()
+
 
 if __name__ == '__main__':
     try:
+        driver = Driver()
+        while not driver.start:
+            time.sleep(10)
+        print("\nDriver Node Running...\n")
+
+        import pygame # for emergency land
         pygame.init()
         pygame.display.set_mode(size=(300,300))
         pygame.display.init()
 
-        driver = Driver()
+        driver.init_tello()
 
         while not rospy.is_shutdown():
             for event in pygame.event.get():
