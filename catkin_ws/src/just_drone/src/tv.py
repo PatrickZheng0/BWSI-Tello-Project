@@ -15,8 +15,7 @@ class TV:
         self.cam_subscriber = rospy.Subscriber('tello/camera', Image, self.cam_callback)
         
     def publish_tv_cmd(self):
-        tv_msg = Twist(0,0,0,0)
-
+        tv_msg = Twist(0,0,0,0) # replace with code to get velocity based on tv position
         self.tv_publisher.publish(tv_msg)
 
     def cam_callback(self, data):

@@ -5,7 +5,7 @@ from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 import numpy as np
 import cv2
-import time
+import time # for automatic landing timeout
 
 
 class Hand:
@@ -16,8 +16,7 @@ class Hand:
         self.cam_subscriber = rospy.Subscriber('tello/camera', Image, self.cam_callback)
         
     def publish_hand_cmd(self):
-        hand_msg = Twist(0,0,0,0)
-
+        hand_msg = Twist(0,0,0,0) # replace with code to get velocity based on hand position
         self.hand_publisher.publish(hand_msg)
 
     def cam_callback(self, data):
