@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-img = cv2.imread('tello_tv.png')
+img = cv2.imread('Separate segmentation/anna_tv.png')
+img = cv2.resize(img, (1152, 768), interpolation=cv2.INTER_AREA)
 hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 hsv_lower = None
 hsv_upper = None

@@ -19,8 +19,7 @@ def get_largest_contour(contours):
 
     return greatest_contour, index
 
-#img = cv2.imread('C:/Patrick/BWSI/BWSI-Tello-Project/Separate segmentation/anna_tv.png')
-img = cv2.imread('./anna_tv.png')
+img = cv2.imread('Separate segmentation/anna_tv.png')
 img = cv2.resize(img, (1152, 768), interpolation=cv2.INTER_AREA)
 new_img = img.copy()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
