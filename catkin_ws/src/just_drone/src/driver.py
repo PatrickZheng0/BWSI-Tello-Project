@@ -39,7 +39,7 @@ class Driver:
         try:
             # get and publish video stream - access through ros
             img = self.getFrame.frame
-            img = cv2.resize(img,(960,720))
+            img = cv2.resize(img,(930,710))
             self.cam_publisher.publish(self.bridge.cv2_to_imgmsg(img,encoding='bgr8'))
 
         except CvBridgeError as e:
