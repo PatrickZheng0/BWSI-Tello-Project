@@ -1,5 +1,8 @@
 import cv2
 
+# tv dimensions in cm
+tv_width = 143
+tv_height = 87
 
 # Return the greatest contour and its index from a sequence of contours
 def get_largest_contour(contours):
@@ -20,6 +23,11 @@ def get_largest_contour(contours):
             greatest_contour_area = cv2.contourArea(contours[i])
 
     return greatest_contour, index
+
+def get_dist_to_tv(tv_height_pxls, tv_height):
+    # focal length = 920 for mm, 92 for cm
+    # uses pinhole camera model
+    return 92*tv_height_pxls/tv_height
 
 
 # Read the image and make a grayscale version of it
@@ -57,3 +65,7 @@ cropped_img[:, x + w:] = 0
 cv2.imshow('cropped', cropped_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# gets distance from drone to tv
+dist = get_dist_to_tv(h, tv_height)
+print(dist)
