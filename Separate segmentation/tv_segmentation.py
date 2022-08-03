@@ -20,27 +20,19 @@ def get_largest_contour(contours):
     return greatest_contour, index
 
 img = cv2.imread('Separate segmentation/anna_tv.png')
-img = cv2.resize(img, (1152, 768), interpolation=cv2.INTER_AREA)
-new_img = img.copy()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 ret, img_thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(img_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 biggest_contour, idx = get_largest_contour(contours)
-largest_contour = cv2.drawContours(new_img, contours, idx,(255,0,255),3)
+largest_contour = cv2.drawContours(img, contours, idx,(255,0,255),3)
 
-x, y, w, h = cv2.boundingRect(contours[idx])
+x, y, w, h = cv2.boundingRect(biggest_contour)
 cv2.rectangle(largest_contour,(x,y), (x+w,y+h), (255,0,0), 5)
-
-cv2.imshow('largest contour w/ bounding box', largest_contour)
-# print('top left',x,y)
-# print('top right',x+w,y)
-# print('bottom left',x,y+h)
-# print('bottom right',x+w,y+h)
 
 crop_ratio = 0.25
 ratio = int(crop_ratio*h)
-cropped_img = new_img[y+ratio:y+h-ratio,x:x+w]
+cropped_img = img[y+ratio:y+h-ratio,x:x+w]
 
 cv2.imshow('cropped', cropped_img)
 
