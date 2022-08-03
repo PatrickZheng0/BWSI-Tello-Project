@@ -47,7 +47,7 @@ class Tv:
         self.bridge = CvBridge()
 
         self.tv_pub = rospy.Publisher('tello/tv_cmd', Twist, queue_size=10)
-        self.tv_cam_pub = rospy.Publisher('tello/tv_cam', Twist, queue_size=10)
+        self.tv_cam_pub = rospy.Publisher('tello/tv_cam', Image, queue_size=10)
         self.cam_sub = rospy.Subscriber('tello/camera', Image, self.cam_callback)
         self.start_sub = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
         
