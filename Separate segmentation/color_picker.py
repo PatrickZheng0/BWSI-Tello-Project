@@ -1,5 +1,22 @@
 import cv2
 import numpy as np
+from djitellopy import Tello
+
+# initialize tello
+tello = Tello()
+tello.connect()
+
+print(tello.get_battery())
+tello.send_rc_control(0, 0, 0, 0)
+tello.streamon()
+frame_read = tello.get_frame_read()
+img = frame_read.frame
+
+# waits for user to press "s", then saves a
+# screenshot to be used for color picking
+key = cv2.waitKey(1)
+if key == ord('s'):
+    cv2.imwrite('screenshot_img', img)
 
 img = cv2.imread('Separate segmentation/anna_tv.png')
 hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)

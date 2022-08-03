@@ -1,4 +1,7 @@
+from turtle import distance
 import cv2
+import numpy as np
+from zmq import TCP_KEEPALIVE_IDLE
 
 # tv dimensions in cm
 tv_width = 143
@@ -25,14 +28,14 @@ def get_largest_contour(contours):
     return greatest_contour, index
 
 def get_dist_to_tv(tv_height_pxls, tv_height):
-    # focal length = 920 for mm, 92 for cm
+    # focal length = 1216.1
     # uses pinhole camera model
-    return 92*tv_height_pxls/tv_height
+    return 1216.1*tv_height/tv_height_pxls
 
 
 # Read the image and make a grayscale version of it
 # (Will later replace with Tello feed)
-img = cv2.imread('Separate segmentation/anna_tv.png')
+img = cv2.imread('Separate segmentation/200_cm_tv.png')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Make a copy of the image to crop later
@@ -62,10 +65,40 @@ cropped_img[:, :x] = 0
 cropped_img[:, x + w:] = 0
 
 # Show the cropped image
-cv2.imshow('cropped', cropped_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+#cv2.imshow('cropped', cropped_img)
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()
 
 # gets distance from drone to tv
 dist = get_dist_to_tv(h, tv_height)
 print(dist)
+
+# find rotation vector to turn camera to face tv
+camera_matrix = np.array([[921.170702, 0.000000, 459.904354],
+                          [0.000000, 919.018377, 351.238301],
+                          [0.000000, 0.000000, 1.000000]])
+distortion = np.array([-0.033458, 0.105152,
+                       0.001256, -0.006647, 0.000000])
+
+# initializes arrays of 3d points of tv corners
+# where (0,0,0) is center of tv screen
+tv_pts_3d = np.array([
+                    [-tv_width/2, tv_height/2, 0],
+                    [tv_width/2, tv_height/2, 0],
+                    [tv_width/2, -tv_height/2, 0],
+                    [-tv_width/2, -tv_height/2, 0]
+                    ])
+# initializes array of 2d points of corners of tv
+# where (0,0) is top left of image taken from tello
+tv_pts_2d = np.array([
+                    [y, x],
+                    [y, x+w],
+                    [y+h, x+w],
+                    [y+h, x]],
+                    dtype=np.float32)
+ret, rvec, tvec = cv2.solvePnP(tv_pts_3d, tv_pts_2d, camera_matrix, 
+                                distortion, flags=cv2.SOLVEPNP_IPPE)
+
+# obtain yaw_error from rotation vector
+yaw_error = rvec[2][0]
+print(yaw_error)
