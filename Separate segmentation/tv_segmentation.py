@@ -50,10 +50,10 @@ x, y, w, h = cv2.boundingRect(biggest_contour)
 cv2.rectangle(largest_contour, (x, y), (x + w, y + h), (255, 0, 0), 5)
 
 # Define the sides of the TV
-left_side = cv2.line(largest_contour, (x, y), (x, y + h))
-right_side = cv2.line(largest_contour, (x + w, y), (x + w, y + h))
-top_side = cv2.line(largest_contour, (x, y + h), (x + w, y + h))
-bottom_side = cv2.line(largest_contour, (x, y), (x + w, y))
+left_side = cv2.line(largest_contour, (x, y), (x, y + h), (0, 255, 0), 2)
+right_side = cv2.line(largest_contour, (x + w, y), (x + w, y + h), (0, 255, 0), 2)
+top_side = cv2.line(largest_contour, (x, y + h), (x + w, y + h), (0, 255, 0), 2)
+bottom_side = cv2.line(largest_contour, (x, y), (x + w, y), (0, 255, 0), 2)
 
 # Crop the image to get rid of noise for future color segmentation
 crop_ratio = 0.25
