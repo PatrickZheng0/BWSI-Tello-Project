@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/include/just_drone/dimensions.h"
+  "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/include/just_drone/Dimensions.h"
   "CMakeFiles/just_drone_generate_messages_cpp"
 )
 

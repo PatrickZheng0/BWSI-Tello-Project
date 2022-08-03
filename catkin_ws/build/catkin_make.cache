@@ -1,0 +1,2 @@
+just_drone
+-DCATKIN_DEVEL_PREFIX=/home/ericvo/BWSI-Tello-Project/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ericvo/BWSI-Tello-Project/catkin_ws/install -G Unix Makefiles

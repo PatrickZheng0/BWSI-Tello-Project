@@ -1,4 +1,4 @@
-prefix=/home/adavid28/BWSI-Tello-Project/catkin_ws/install
+prefix=/home/ericvo/BWSI-Tello-Project/catkin_ws/install
 
 Name: just_drone
 Description: Description of just_drone
