@@ -27,17 +27,9 @@ def get_largest_contour(contours):
 
     return greatest_contour, index
 
-def get_dist_to_tv(tv_height_pxls, tv_height):
-    # focal length = 1216.1
-    # uses pinhole camera model
-    return 1216.1*tv_height/tv_height_pxls
-
-
 # Read the image and make a grayscale version of it
 # (Will later replace with Tello feed)
 img = cv2.imread('Separate segmentation/screenshot_img.jpg')
-cv2.imshow('img',img)
-cv2.waitKey(0)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Make a copy of the image to crop later
@@ -71,10 +63,6 @@ cropped_img[:, x + w:] = 0
 #cv2.waitKey(0)
 #cv2.destroyAllWindows()
 
-# gets distance from drone to tv
-dist = get_dist_to_tv(h, tv_height)
-print(dist)
-
 # find rotation vector to turn camera to face tv
 camera_matrix = np.array([[921.170702, 0.000000, 459.904354],
                           [0.000000, 919.018377, 351.238301],
@@ -104,3 +92,7 @@ ret, rvec, tvec = cv2.solvePnP(tv_pts_3d, tv_pts_2d, camera_matrix,
 # obtain yaw_error from rotation vector
 yaw_error = rvec[2][0]
 print(yaw_error)
+
+# obtain distance from translation vector
+dist = tvec[2][0]
+print(dist)
