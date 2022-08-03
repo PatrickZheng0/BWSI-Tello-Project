@@ -32,11 +32,11 @@ if __name__ == '__main__':
         tv_h = input("\nInput TV height in cm: ")
         while True:
             try:
-                w = int(tv_h)
+                h = int(tv_h)
                 break
             except:
                 print("Invalid dimensions. Try again.")
-                tv_w = input("\nInput TV height in cm: ")
+                tv_h = input("\nInput TV height in cm: ")
         startup.publish_start(w,h)
         print("Dimensions received.\n")
         
