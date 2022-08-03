@@ -25,6 +25,7 @@ def get_largest_contour(contours):
 # Read the image and make a grayscale version of it
 # (Will later replace with Tello feed)
 img = cv2.imread('Separate segmentation/anna_tv.png')
+cropped_img = img.copy()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Filter out the brighter pixels from the TV and create a contour for it
@@ -41,10 +42,14 @@ largest_contour = cv2.drawContours(img, contours, idx, (255, 0, 255), 3)
 x, y, w, h = cv2.boundingRect(biggest_contour)
 cv2.rectangle(largest_contour, (x, y), (x + w, y + h), (255, 0, 0), 5)
 
-# Crop the image to get rid of noise and improve future color segmentation
+# Crop the image to get rid of noise for future color segmentation
 crop_ratio = 0.25
-ratio = round(crop_ratio * h)
-cropped_img = img[y + ratio:y + h - ratio, x:x + w]
+ratio = int(crop_ratio*h)
+
+cropped_img[:y + ratio, :] = 0
+cropped_img[y + h - ratio:, :] = 0
+cropped_img[:, :x] = 0
+cropped_img[:, x + w:] = 0
 
 # Show the cropped image
 cv2.imshow('cropped', cropped_img)

@@ -65,7 +65,7 @@ class PID:
             prev_errorY = errorY
 
             self.last_time = self.current_time
-                    
+
 
     def set_sample_time(self, sample_time):
         self.sample_time = sample_time
