@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/__init__.py"
-  "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/_dimensions.py"
+  "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/_Dimensions.py"
+  "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/__init__.py"
   "CMakeFiles/just_drone_generate_messages_py"
 )
 

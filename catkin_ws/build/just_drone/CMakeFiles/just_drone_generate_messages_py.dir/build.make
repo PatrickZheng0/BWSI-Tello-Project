@@ -43,47 +43,47 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone
+CMAKE_SOURCE_DIR = /home/ericvo/BWSI-Tello-Project/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone
+CMAKE_BINARY_DIR = /home/ericvo/BWSI-Tello-Project/catkin_ws/build
 
 # Utility rule file for just_drone_generate_messages_py.
 
 # Include the progress variables for this target.
-include CMakeFiles/just_drone_generate_messages_py.dir/progress.make
+include just_drone/CMakeFiles/just_drone_generate_messages_py.dir/progress.make
 
-CMakeFiles/just_drone_generate_messages_py: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/_dimensions.py
-CMakeFiles/just_drone_generate_messages_py: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/__init__.py
+just_drone/CMakeFiles/just_drone_generate_messages_py: /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/_Dimensions.py
+just_drone/CMakeFiles/just_drone_generate_messages_py: /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/__init__.py
 
 
-/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/_dimensions.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/_dimensions.py: /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/dimensions.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG just_drone/dimensions"
-	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/dimensions.msg -Ijust_drone:/home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ijust_drone:/home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg -p just_drone -o /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg
+/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/_Dimensions.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/_Dimensions.py: /home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/Dimensions.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ericvo/BWSI-Tello-Project/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG just_drone/Dimensions"
+	cd /home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/Dimensions.msg -Ijust_drone:/home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p just_drone -o /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg
 
-/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/__init__.py: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/_dimensions.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for just_drone"
-	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg --initpy
+/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/__init__.py: /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/_Dimensions.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ericvo/BWSI-Tello-Project/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for just_drone"
+	cd /home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg --initpy
 
-just_drone_generate_messages_py: CMakeFiles/just_drone_generate_messages_py
-just_drone_generate_messages_py: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/_dimensions.py
-just_drone_generate_messages_py: /home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone/msg/__init__.py
-just_drone_generate_messages_py: CMakeFiles/just_drone_generate_messages_py.dir/build.make
+just_drone_generate_messages_py: just_drone/CMakeFiles/just_drone_generate_messages_py
+just_drone_generate_messages_py: /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/_Dimensions.py
+just_drone_generate_messages_py: /home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone/msg/__init__.py
+just_drone_generate_messages_py: just_drone/CMakeFiles/just_drone_generate_messages_py.dir/build.make
 
 .PHONY : just_drone_generate_messages_py
 
 # Rule to build all files generated by this target.
-CMakeFiles/just_drone_generate_messages_py.dir/build: just_drone_generate_messages_py
+just_drone/CMakeFiles/just_drone_generate_messages_py.dir/build: just_drone_generate_messages_py
 
-.PHONY : CMakeFiles/just_drone_generate_messages_py.dir/build
+.PHONY : just_drone/CMakeFiles/just_drone_generate_messages_py.dir/build
 
-CMakeFiles/just_drone_generate_messages_py.dir/clean:
-	$(CMAKE_COMMAND) -P CMakeFiles/just_drone_generate_messages_py.dir/cmake_clean.cmake
-.PHONY : CMakeFiles/just_drone_generate_messages_py.dir/clean
+just_drone/CMakeFiles/just_drone_generate_messages_py.dir/clean:
+	cd /home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone && $(CMAKE_COMMAND) -P CMakeFiles/just_drone_generate_messages_py.dir/cmake_clean.cmake
+.PHONY : just_drone/CMakeFiles/just_drone_generate_messages_py.dir/clean
 
-CMakeFiles/just_drone_generate_messages_py.dir/depend:
-	cd /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone /home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles/just_drone_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : CMakeFiles/just_drone_generate_messages_py.dir/depend
+just_drone/CMakeFiles/just_drone_generate_messages_py.dir/depend:
+	cd /home/ericvo/BWSI-Tello-Project/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ericvo/BWSI-Tello-Project/catkin_ws/src /home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone /home/ericvo/BWSI-Tello-Project/catkin_ws/build /home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone /home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone/CMakeFiles/just_drone_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : just_drone/CMakeFiles/just_drone_generate_messages_py.dir/depend
 

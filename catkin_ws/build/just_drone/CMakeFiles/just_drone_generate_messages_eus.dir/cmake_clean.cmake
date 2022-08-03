@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/manifest.l"
-  "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone/msg/dimensions.l"
+  "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/share/roseus/ros/just_drone/manifest.l"
+  "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/share/roseus/ros/just_drone/msg/Dimensions.l"
   "CMakeFiles/just_drone_generate_messages_eus"
 )
 

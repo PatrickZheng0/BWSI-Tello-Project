@@ -1,4 +1,0 @@
-[31m[1mCMake Error[0m at /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/CMakeLists.txt:70 (generate_messages):
-  Unknown CMake command "generate_messages".
-
-

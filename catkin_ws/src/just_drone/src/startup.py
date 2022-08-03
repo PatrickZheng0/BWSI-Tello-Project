@@ -2,16 +2,16 @@
  
 import rospy
 from std_msgs.msg import Empty
-from just_drone.msg import dimensions
+from just_drone.msg import Dimensions
 
 
 class Startup:
     def __init__(self):
         rospy.init_node('startup', anonymous=True)
-        self.start_publisher = rospy.Publisher('tello/start', dimensions, queue_size=1)
+        self.start_publisher = rospy.Publisher('tello/start', Dimensions, queue_size=1)
         
     def publish_start(self,w,h):
-        start_msg = dimensions()
+        start_msg = Dimensions()
         start_msg.width = w
         start_msg.height = h
         self.start_publisher.publish(start_msg)

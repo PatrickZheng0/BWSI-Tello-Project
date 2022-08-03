@@ -1,1 +1,0 @@
-/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/common-lisp/ros/just_drone/msg/_package_tv_dim.lisp

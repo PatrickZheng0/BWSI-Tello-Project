@@ -1,8 +1,8 @@
-# Install script for directory: /home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone
+# Install script for directory: /home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/adavid28/BWSI-Tello-Project/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ericvo/BWSI-Tello-Project/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,160 +38,53 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  
-      if (NOT EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}")
-        file(MAKE_DIRECTORY "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}")
-      endif()
-      if (NOT EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/.catkin")
-        file(WRITE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/.catkin" "")
-      endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/msg" TYPE FILE FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/Dimensions.msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/adavid28/BWSI-Tello-Project/catkin_ws/install/_setup_util.py")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-file(INSTALL DESTINATION "/home/adavid28/BWSI-Tello-Project/catkin_ws/install" TYPE PROGRAM FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/_setup_util.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/cmake" TYPE FILE FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_drone-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/adavid28/BWSI-Tello-Project/catkin_ws/install/env.sh")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-file(INSTALL DESTINATION "/home/adavid28/BWSI-Tello-Project/catkin_ws/install" TYPE PROGRAM FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/env.sh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/include/just_drone")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/adavid28/BWSI-Tello-Project/catkin_ws/install/setup.bash;/home/adavid28/BWSI-Tello-Project/catkin_ws/install/local_setup.bash")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-file(INSTALL DESTINATION "/home/adavid28/BWSI-Tello-Project/catkin_ws/install" TYPE FILE FILES
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/setup.bash"
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/local_setup.bash"
-    )
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/share/roseus/ros/just_drone")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/adavid28/BWSI-Tello-Project/catkin_ws/install/setup.sh;/home/adavid28/BWSI-Tello-Project/catkin_ws/install/local_setup.sh")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-file(INSTALL DESTINATION "/home/adavid28/BWSI-Tello-Project/catkin_ws/install" TYPE FILE FILES
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/setup.sh"
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/local_setup.sh"
-    )
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/share/common-lisp/ros/just_drone")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/adavid28/BWSI-Tello-Project/catkin_ws/install/setup.zsh;/home/adavid28/BWSI-Tello-Project/catkin_ws/install/local_setup.zsh")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-file(INSTALL DESTINATION "/home/adavid28/BWSI-Tello-Project/catkin_ws/install" TYPE FILE FILES
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/setup.zsh"
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/local_setup.zsh"
-    )
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/share/gennodejs/ros/just_drone")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/adavid28/BWSI-Tello-Project/catkin_ws/install/.rosinstall")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-file(INSTALL DESTINATION "/home/adavid28/BWSI-Tello-Project/catkin_ws/install" TYPE FILE FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/.rosinstall")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/msg" TYPE FILE FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/dimensions.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/lib/python3/dist-packages/just_drone")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/cmake" TYPE FILE FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_drone-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_drone.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/include/just_drone")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/roseus/ros/just_drone")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/common-lisp/ros/just_drone")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/gennodejs/ros/just_drone")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/lib/python3/dist-packages/just_drone")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_drone.pc")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/cmake" TYPE FILE FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_drone-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/cmake" TYPE FILE FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_drone-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone/cmake" TYPE FILE FILES
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_droneConfig.cmake"
-    "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_droneConfig-version.cmake"
+    "/home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_droneConfig.cmake"
+    "/home/ericvo/BWSI-Tello-Project/catkin_ws/build/just_drone/catkin_generated/installspace/just_droneConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone" TYPE FILE FILES "/home/adavid28/BWSI-Tello-Project/catkin_ws/src/just_drone/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/just_drone" TYPE FILE FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone/package.xml")
 endif()
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/gtest/cmake_install.cmake")
-
-endif()
-
-if(CMAKE_INSTALL_COMPONENT)
-  set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
-else()
-  set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
-endif()
-
-string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
-       "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/adavid28/BWSI-Tello-Project/catkin_ws/build/just_drone/${CMAKE_INSTALL_MANIFEST}"
-     "${CMAKE_INSTALL_MANIFEST_CONTENT}")

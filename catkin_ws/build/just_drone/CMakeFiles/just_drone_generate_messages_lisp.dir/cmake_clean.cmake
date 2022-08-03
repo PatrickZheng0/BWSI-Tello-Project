@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/adavid28/BWSI-Tello-Project/catkin_ws/devel/.private/just_drone/share/common-lisp/ros/just_drone/msg/dimensions.lisp"
+  "/home/ericvo/BWSI-Tello-Project/catkin_ws/devel/share/common-lisp/ros/just_drone/msg/Dimensions.lisp"
   "CMakeFiles/just_drone_generate_messages_lisp"
 )
 
