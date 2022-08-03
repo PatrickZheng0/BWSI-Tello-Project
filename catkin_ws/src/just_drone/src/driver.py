@@ -20,9 +20,10 @@ class Driver:
 
         # initialize other variables
         self.bridge = CvBridge()
-        self.hand_cmd = (0, 0, 0, 0)
-        self.tv_cmd = (0, 0, 0, 0)
+        self.hand_cmd = [0, 0, 0, 0] # [y, x, z, yaw]
+        self.tv_cmd = [0, 0, 0, 0] # [y, x, z, yaw]
         self.start = False
+        self.stop = False
 
         # initialize publishers and subscribers
         self.cam_pub = rospy.Publisher('tello/camera', Image, queue_size=10)
@@ -47,13 +48,19 @@ class Driver:
         self.start = True
 
     def land_callback(self, data):
-        pass
+        self.stop = True
 
     def hand_callback(self, data):
-        pass
+        # only changes y and z
+        self.hand_cmd[0] = data.linear.y
+        self.hand_cmd[2] = data.linear.z
 
     def tv_callback(self, data):
-        pass
+        # x for distance, yaw to be perpendicular, y and z to stay within tv border
+        self.tv_cmd[0] = data.linear.y
+        self.tv_cmd[1] = data.linear.x
+        self.tv_cmd[2] = data.linear.z
+        self.tv_cmd[3] = data.angular.z # yaw
 
     def init_tello(self):
         self.tello = Tello()
@@ -79,10 +86,24 @@ if __name__ == '__main__':
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
+                        driver.stop = True
                         break
                 if event.type == pygame.QUIT:
                     break
+            if driver.stop:
+                break
             driver.publish_video()
+            if driver.tv_cmd[0] == 0:
+                y = driver.hand_cmd[0]
+            else:
+                y = driver.tv_cmd[0]
+            x = driver.tv_cmd[1]
+            if driver.tv_cmd[2] == 0:
+                z = driver.hand_cmd[2]
+            else:
+                z = driver.tv_cmd[2]
+            yaw = driver.tv_cmd[3]
+            driver.tello.send_rc_control(y,x,z,yaw)
 
         driver.tello.send_rc_control(0, 0, 0, 0)
         driver.tello.land()
