@@ -117,12 +117,13 @@ def find_contours(mask):
 
 
 def get_contour_center(contour):
-    M = cv2.moments(contour)
+    M = cv2.moments(contour) #moments
 
     if M["m00"] <= 0:
         return None
 
-    center_col = M["m10"]//M["m00"]
+    #weighted average of moments
+    center_col = M["m10"]//M["m00"] 
     center_row = M["m01"]//M["m00"]
 
     return (center_col, center_row)
@@ -143,6 +144,7 @@ if __name__ == "__main__":
 
     # for emergency land
     import pygame
+
     pygame.init()
     pygame.display.set_mode(size=(300,300))
     pygame.display.init()
