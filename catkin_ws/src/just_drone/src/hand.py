@@ -65,7 +65,7 @@ class PID:
             print(errorX)
             print(errorY)
             if abs(errorX) > 0.5 or abs(errorY) > 0.5: # don't adjust for small errors
-                print('vels', Vx, Vy)
+                # print('vels', Vx, Vy)
                 hand.publish_hand_cmd(int(round(Vx)), 0, int(round(Vy)), 0)
                 # tello.send_rc_control(int(round(Vx)), 0, int(round(Vy)), 0) # round velocities to integers, send x and y velocities to tello
             else: # if small error, send 0 velocities
@@ -101,23 +101,6 @@ def get_largest_contour(contours):
             greatest_contour_area = cv2.contourArea(contours[i])
 
     return greatest_contour
-
-
-def get_highest_contour(contours):
-    highest_contour_row = float("inf")
-    highest_contour = None
-
-    if len(contours) == 0:
-        return None
-
-    for contour in contours:
-        M = cv2.moments(contour)
-        center_row = M["m01"]//M["m00"]
-        if center_row < highest_contour_row:
-            highest_contour = contour
-            highest_contour_row = center_row
-
-    return highest_contour
 
 
 def find_contours(mask):
