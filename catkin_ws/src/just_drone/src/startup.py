@@ -20,18 +20,18 @@ class Startup:
 
 if __name__ == '__main__':
     try:
-        print("Startup node running...")
+        print("\nStartup node running...\n")
         startup = Startup()
         while True:
             try:
-                tv_width = float(input("Input TV width in inches:"))
+                tv_width = float(input("\nInput TV width in inches: "))
                 break
             except ValueError:
                 print("Error: Please input a number.")
 
         while True:    
             try:
-                tv_height = float(input("Input TV height in inches:"))
+                tv_height = float(input("\nInput TV height in inches: "))
                 break
             except ValueError:
                 print("Error: Please input a number.")
@@ -41,6 +41,6 @@ if __name__ == '__main__':
             if sound: # check for start sound
                 startup.publish_start(tv_width, tv_height)
                 break
-        print("Startup node finished")
+        print("\nStartup node finished\n")
     except rospy.ROSInterruptException:
         pass
