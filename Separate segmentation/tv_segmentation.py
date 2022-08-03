@@ -27,7 +27,7 @@ def get_largest_contour(contours):
 def get_dist_to_tv(tv_height_pxls, tv_height):
     # focal length = 920 for mm, 92 for cm
     # uses pinhole camera model
-    return 92*tv_height_pxls/tv_height
+    return 92*tv_height/tv_height_pxls
 
 
 # Read the image and make a grayscale version of it
