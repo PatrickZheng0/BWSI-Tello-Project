@@ -95,21 +95,21 @@ def get_largest_contour(contours):
     return greatest_contour
 
 
- def get_highest_contour(contours):
-     highest_contour_row = float("inf")
-     highest_contour = None
+def get_highest_contour(contours):
+    highest_contour_row = float("inf")
+    highest_contour = None
 
-     if len(contours) == 0:
-         return None
+    if len(contours) == 0:
+        return None
 
-     for contour in contours:
-         M = cv2.moments(contour)
-         center_row = M["m01"]//M["m00"]
-         if center_row < highest_contour_row:
-             highest_contour = contour
-             highest_contour_row = center_row
+    for contour in contours:
+        M = cv2.moments(contour)
+        center_row = M["m01"]//M["m00"]
+        if center_row < highest_contour_row:
+            highest_contour = contour
+            highest_contour_row = center_row
 
-     return highest_contour
+    return highest_contour
 
 
 def find_contours(mask):
@@ -124,7 +124,7 @@ def get_contour_center(contour):
 
     center_col = M["m10"]//M["m00"]
     center_row = M["m01"]//M["m00"]
- 
+
     return (center_col, center_row)
 
 
@@ -194,7 +194,7 @@ if __name__ == "__main__":
             tello.land()
             break
         
-        # emeergency land
+        # emergency land
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
