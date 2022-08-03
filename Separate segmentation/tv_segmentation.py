@@ -4,8 +4,8 @@ import numpy as np
 from zmq import TCP_KEEPALIVE_IDLE
 
 # tv dimensions in cm
-tv_width = 143
-tv_height = 87
+tv_width = 15
+tv_height = 8.6
 
 # Return the greatest contour and its index from a sequence of contours
 def get_largest_contour(contours):
@@ -35,7 +35,9 @@ def get_dist_to_tv(tv_height_pxls, tv_height):
 
 # Read the image and make a grayscale version of it
 # (Will later replace with Tello feed)
-img = cv2.imread('Separate segmentation/200_cm_tv.png')
+img = cv2.imread('Separate segmentation/screenshot_img.jpg')
+cv2.imshow('img',img)
+cv2.waitKey(0)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Make a copy of the image to crop later

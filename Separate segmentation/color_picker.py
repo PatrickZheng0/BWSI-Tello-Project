@@ -9,23 +9,26 @@ tello.connect()
 print(tello.get_battery())
 tello.send_rc_control(0, 0, 0, 0)
 tello.streamon()
-frame_read = tello.get_frame_read()
-img = frame_read.frame
 
-# waits for user to press "s", then saves a
-# screenshot to be used for color picking
-key = cv2.waitKey(1)
-if key == ord('s'):
-    cv2.imwrite('screenshot_img', img)
+while True:
+    # waits for user to press "s", then saves a
+    # screenshot to be used for color picking
+    frame_read = tello.get_frame_read()
+    img = frame_read.frame
 
-img = cv2.imread('Separate segmentation/anna_tv.png')
-hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    key = cv2.waitKey(0) & 0xFF
+    if key == ord('s'):
+        cv2.imwrite('screenshot_img.jpg', img)
+        break
+
+image = cv2.imread('Separate segmentation/screenshot_img.jpg')
+hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
 # initialize lower and upper bound variables
 hsv_lower = None
 hsv_upper = None
 
-cv2.imshow('image', img)
+cv2.imshow('image', image)
 
 # callback function for when mouse is moved
 def color_picker(event, x, y, flags, params):    
@@ -43,9 +46,11 @@ def color_picker(event, x, y, flags, params):
                 hsv_upper[i] = 255
         if hsv_upper[0] > 180:
             hsv_upper[0] = 180
+
+        print('press any key to continue')
     
 # calls the color_picker callback function when mouse is
-#  moved and applies actions to image in window 'image'
+# moved and applies actions to image in window 'image'
 cv2.setMouseCallback('image', color_picker)
 
 cv2.waitKey(0)
