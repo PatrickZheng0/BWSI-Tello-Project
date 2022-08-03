@@ -66,10 +66,11 @@ class PID:
             print(errorY)
             if abs(errorX) > 0.5 or abs(errorY) > 0.5: # don't adjust for small errors
                 print('vels', Vx, Vy)
+                hand.publish_hand_cmd(int(round(Vx)), 0, int(round(Vy)), 0)
                 # tello.send_rc_control(int(round(Vx)), 0, int(round(Vy)), 0) # round velocities to integers, send x and y velocities to tello
             else: # if small error, send 0 velocities
                 # tello.send_rc_control(0, 0, 0, 0)
-                pass
+                hand.publish_hand_cmd(0, 0, 0, 0)
 
             # update for next iteration
             prev_errorX = errorX
@@ -147,8 +148,12 @@ class Hand:
         self.tv_cam_subscriber = rospy.Subscriber('tello/tv_cam', Image, self.tv_cam_callback)
         self.start_subscriber = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
         
-    def publish_hand_cmd(self):
-        hand_msg = Twist(0, 0, 0, 0) # replace with code to get velocity based on hand position
+    def publish_hand_cmd(self, lr, fb, ud, yaw):
+        hand_msg = Twist() # replace with code to get velocity based on hand position
+        hand_msg.linear.x = lr
+        hand_msg.linear.y = fb
+        hand_msg.linear.z = ud
+        hand_msg.angular.z = yaw
         self.hand_publisher.publish(hand_msg)
 
     def tv_cam_callback(self, data):
@@ -175,7 +180,7 @@ class Hand:
                     center[1] = img.shape[0] - contour_center[1] # change (0,0) of image from top left to bottom left
                     hand_pid.tracker(center)
             else:
-                pass
+                hand.publish_hand_cmd(0, 0, 0, 0)
                 # tello.send_rc_control(0, 0, 0, 0)
 
     def start_callback(self, data):
