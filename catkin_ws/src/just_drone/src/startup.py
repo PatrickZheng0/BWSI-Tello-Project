@@ -8,9 +8,10 @@ from just_drone.msg import Dimensions
 class Startup:
     def __init__(self):
         rospy.init_node('startup', anonymous=True)
-        self.start_publisher = rospy.Publisher('tello/start', Dimensions, queue_size=1)
+        self.start_publisher = rospy.Publisher('tello/start', Dimensions,
+                                               queue_size=1)
         
-    def publish_start(self,w,h):
+    def publish_start(self, w, h):
         start_msg = Dimensions()
         start_msg.width = w
         start_msg.height = h
@@ -19,32 +20,27 @@ class Startup:
 
 if __name__ == '__main__':
     try:
-        print("\nStartup Node Running...\n")
+        print("Startup node running...")
         startup = Startup()
-        tv_w = input("\nInput TV width in cm: ")
         while True:
             try:
-                w = int(tv_w)
+                tv_width = float(input("Input TV width in inches:"))
                 break
-            except:
-                print("Invalid dimensions. Try again.")
-                tv_w = input("\nInput TV width in cm: ")
-        tv_h = input("\nInput TV height in cm: ")
-        while True:
+            except ValueError:
+                print("Error: Please input a number.")
+
+        while True:    
             try:
-                h = int(tv_h)
+                tv_height = float(input("Input TV height in inches:"))
                 break
-            except:
-                print("Invalid dimensions. Try again.")
-                tv_h = input("\nInput TV height in cm: ")
-        startup.publish_start(w,h)
-        print("Dimensions received.\n")
-        
+            except ValueError:
+                print("Error: Please input a number.")
+              
         sound = True # delete when adding sound takeoff
         while not rospy.is_shutdown():
             if sound: # check for start sound
-                startup.publish_start(w,h)
+                startup.publish_start(tv_width, tv_height)
                 break
-        print("\nStartup Node Finished\n")
+        print("Startup node finished")
     except rospy.ROSInterruptException:
         pass
