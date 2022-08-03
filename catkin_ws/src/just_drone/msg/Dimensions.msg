@@ -1,2 +1,2 @@
-int32 width
-int32 height
+float32 width
+float32 height
