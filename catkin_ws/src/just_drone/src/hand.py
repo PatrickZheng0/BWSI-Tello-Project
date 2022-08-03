@@ -191,8 +191,7 @@ if __name__ == '__main__':
         start = time.time()
         print("Hand node running...")
 
-        while not rospy.is_shutdown():
-            pass
+        spin()
         
     except rospy.ROSInterruptException:
         pass
