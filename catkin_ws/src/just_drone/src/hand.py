@@ -62,10 +62,10 @@ class PID:
             Vx = Px + (self.Ki * Ix) + Dx
             Vy = Py + (self.Ki * Iy) + Dy
 
-            print(errorX)
-            print(errorY)
+            #print(errorX)
+            #print(errorY)
             if abs(errorX) > 0.5 or abs(errorY) > 0.5: # don't adjust for small errors
-                print('vels', Vx, Vy)
+                #print('vels', Vx, Vy)
                 hand.publish_hand_cmd(int(round(Vx)), 0, int(round(Vy)), 0)
                 # tello.send_rc_control(int(round(Vx)), 0, int(round(Vy)), 0) # round velocities to integers, send x and y velocities to tello
             else: # if small error, send 0 velocities

@@ -20,8 +20,8 @@ class Driver:
 
         # initialize other variables
         self.bridge = CvBridge()
-        self.hand_cmd = [0, 0, 0, 0] # [y, x, z, yaw]
-        self.tv_cmd = [0, 0, 0, 0] # [y, x, z, yaw]
+        self.hand_cmd = [0, 0, 0, 0] # [x, y, z, yaw]
+        self.tv_cmd = [0, 0, 0, 0] # [x, y, z, yaw]
         self.start = False
         self.stop = False
 
@@ -52,14 +52,14 @@ class Driver:
 
     def hand_callback(self, data):
         # only changes y and z
-        self.hand_cmd[0] = data.linear.y
+        self.hand_cmd[0] = data.linear.x
         self.hand_cmd[2] = data.linear.z
 
     def tv_callback(self, data):
-        # x for distance, yaw to be perpendicular, y and z to stay within tv border
-        self.tv_cmd[0] = data.linear.y
-        self.tv_cmd[1] = data.linear.x
-        self.tv_cmd[2] = data.linear.z
+        # y for distance, yaw to be perpendicular, x and z to stay within tv border
+        self.tv_cmd[0] = data.linear.x # left-right
+        self.tv_cmd[1] = data.linear.y # forward-back
+        self.tv_cmd[2] = data.linear.z # up-down
         self.tv_cmd[3] = data.angular.z # yaw
 
     def init_tello(self):
@@ -94,10 +94,10 @@ if __name__ == '__main__':
                 break
             driver.publish_video()
             if driver.tv_cmd[0] == 0:
-                y = driver.hand_cmd[0]
+                x = driver.hand_cmd[0]
             else:
-                y = driver.tv_cmd[0]
-            x = driver.tv_cmd[1]
+                x = driver.tv_cmd[0]
+            y = driver.tv_cmd[1]
             if driver.tv_cmd[2] == 0:
                 z = driver.hand_cmd[2]
             else:
