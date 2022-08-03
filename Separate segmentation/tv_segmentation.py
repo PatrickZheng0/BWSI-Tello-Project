@@ -20,6 +20,7 @@ def get_largest_contour(contours):
     return greatest_contour, index
 
 img = cv2.imread('Separate segmentation/anna_tv.png')
+cropped_img = img.copy()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 ret, img_thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
@@ -32,7 +33,11 @@ cv2.rectangle(largest_contour,(x,y), (x+w,y+h), (255,0,0), 5)
 
 crop_ratio = 0.25
 ratio = int(crop_ratio*h)
-cropped_img = img[y+ratio:y+h-ratio,x:x+w]
+
+cropped_img[:y+ratio,:] = 0
+cropped_img[y+h-ratio:,:] = 0
+cropped_img[:,:x] = 0
+cropped_img[:,x+w:] = 0
 
 cv2.imshow('cropped', cropped_img)
 
