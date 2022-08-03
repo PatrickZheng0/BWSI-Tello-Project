@@ -21,29 +21,24 @@ if __name__ == '__main__':
     try:
         print("\nStartup Node Running...\n")
         startup = Startup()
-        tv_dim = input("\nInput TV dimensions in inches (w,h): ")
+        tv_w = input("\nInput TV width in cm: ")
         while True:
-            i = tv_dim.find("(")
-            if i >= 0:
-                tv_dim = tv_dim[i+1:]
-            i = tv_dim.find(")")
-            if i >= 0:
-                tv_dim = tv_dim[:i]
-            i = tv_dim.find(" ")
-            while i >= 0:
-                tv_dim = tv_dim[:i] + tv_dim[i+1:]
-                i = tv_dim.find(" ")
             try:
-                i = tv_dim.index(",")
-                w = tv_dim[:i]
-                h = tv_dim[i+1:]
-                w = int(w)
-                h = int(h)
-                print("Dimensions received.\n")
+                w = int(tv_w)
                 break
             except:
                 print("Invalid dimensions. Try again.")
-                tv_dim = input("\nInput TV dimensions in inches (w,h): ")
+                tv_w = input("\nInput TV width in cm: ")
+        tv_h = input("\nInput TV height in cm: ")
+        while True:
+            try:
+                h = int(tv_h)
+                break
+            except:
+                print("Invalid dimensions. Try again.")
+                tv_h = input("\nInput TV height in cm: ")
+        startup.publish_start(w,h)
+        print("Dimensions received.\n")
         
         sound = True # delete when adding sound takeoff
         while not rospy.is_shutdown():
