@@ -165,6 +165,8 @@ class Hand:
             else:
                 hand.publish_hand_cmd(0, 0, 0, 0)
                 # tello.send_rc_control(0, 0, 0, 0)
+            
+            start = time.time()
 
     def start_callback(self, data):
         self.start = True
