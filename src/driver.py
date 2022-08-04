@@ -93,16 +93,20 @@ if __name__ == '__main__':
             if driver.stop:
                 break
             driver.publish_video()
-#            if driver.tv_cmd[0] == 0:
-#                x = driver.hand_cmd[0]
-#            else:
-            x = driver.tv_cmd[0]
+            if driver.tv_cmd[0] == 0:
+                x = driver.hand_cmd[0]
+            else:
+                x = driver.tv_cmd[0]
+            
             y = driver.tv_cmd[1]
-#            if driver.tv_cmd[2] == 0:
-#                z = driver.hand_cmd[2]
-#            else:
-            z = driver.tv_cmd[2]
+
+            if driver.tv_cmd[2] == 0:
+                z = driver.hand_cmd[2]
+            else:
+                z = driver.tv_cmd[2]
+
             yaw = driver.tv_cmd[3]
+
             driver.tello.send_rc_control(round(x),round(y),round(z),round(yaw))
 
         driver.tello.send_rc_control(0, 0, 0, 0)
