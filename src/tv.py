@@ -54,7 +54,7 @@ class Tv:
 
     def cam_callback(self, data):  
         # Read the image and make a grayscale version of it      
-        img = self.bridge.imgmsg_to_cv2(data, encoding='bgr8')
+        img = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Make a copy of the image to crop later
@@ -166,7 +166,7 @@ class Tv:
 
         try:
             self.tv_cam_pub.publish(
-                self.bridge.cv2_to_imgmsg(data, encoding='bgr8')
+                self.bridge.cv2_to_imgmsg(cropped_img, encoding='bgr8')
             )
         except CvBridgeError as e:
             rospy.logerr(e)

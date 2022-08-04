@@ -142,7 +142,7 @@ class Hand:
     def tv_cam_callback(self, data):
         curr = time.time()
         if curr - start >= wait_time: # only process and image specified number of times per second
-            img = self.bridge.imgmsg_to_cv2(data, encoding='bgr8')
+            img = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
 
             hsv_img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
 
