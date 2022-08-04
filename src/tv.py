@@ -60,6 +60,8 @@ class Tv:
         # Make a copy of the image to crop later
         cropped_img = img.copy()
 
+        gray = cv2.GaussianBlur(gray, (7,7), cv2.BORDER_DEFAULT)
+
         # Filter out the brighter pixels from the TV and create a contour for it
         ret, img_thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
         contours, hierarchy = cv2.findContours(img_thresh, cv2.RETR_TREE,
@@ -69,10 +71,11 @@ class Tv:
         # by takng the largest contour
         biggest_contour, idx = get_largest_contour(contours)
         largest_contour = cv2.drawContours(img, contours, idx, (255, 0, 255), 3)
+        bounding_img = largest_contour.copy()
 
         # Draw a bounding box around the contour
         x, y, w, h = cv2.boundingRect(biggest_contour)
-        cv2.rectangle(largest_contour, (x, y), (x + w, y + h), (255, 0, 0), 5)
+        cv2.rectangle(bounding_img, (x, y), (x + w, y + h), (255, 0, 0), 5)
 
         # Crop the image to get rid of noise for future color segmentation
         crop_ratio = 0.25
@@ -113,6 +116,7 @@ class Tv:
         yaw_error = rvec[2][0]
         # obtain distance from translation vector
         dist = tvec[2][0]
+        print(dist)
 
 
         # tv controls based on if drone is outside bounding rectangle borders
@@ -141,11 +145,11 @@ class Tv:
 
         # if drone center is too far down of bottom
         # rectangle wall then move up
-        if (y + h) > 360:
+        if (y + h) < 360:
             ud_dir = 1 # up down direction
         # if drone center is too far up of top
         # rectangle wall then move down
-        elif y < 360:
+        elif y > 360:
             ud_dir = -1
         # drone is in good spot, don't need to follow tv control
         else:
@@ -161,13 +165,19 @@ class Tv:
         else:
             yaw_dir = 0
         
+        print(y+h, "y+h")
+        print(y, "y")
+        print(bounding_img.shape, "shape")
+
         tv.publish_tv_cmd(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
         # tello.send_rc_control(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
 
         try:
             self.tv_cam_pub.publish(
-                self.bridge.cv2_to_imgmsg(cropped_img, encoding='bgr8')
+    #            self.bridge.cv2_to_imgmsg(cropped_img, encoding='bgr8')
+                self.bridge.cv2_to_imgmsg(bounding_img, encoding='bgr8')
             )
+
         except CvBridgeError as e:
             rospy.logerr(e)
 

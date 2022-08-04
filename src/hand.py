@@ -135,6 +135,7 @@ class Hand:
         self.hand_publisher = rospy.Publisher('tello/hand_cmd', Twist, queue_size=10)
         self.tv_cam_subscriber = rospy.Subscriber('tello/tv_cam', Image, self.tv_cam_callback)
         self.start_subscriber = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
+        self.mask_publisher = rospy.Publisher('tello/mask', Image, queue_size=10)
         
     def publish_hand_cmd(self, lr, fb, ud, yaw):
         hand_msg = Twist() # replace with code to get velocity based on hand position
@@ -156,6 +157,9 @@ class Hand:
             mask = cv2.inRange(hsv_img, self.hsv_lower, self.hsv_upper, mask)
             # since tello drone gets image in rgb, bitwise_and uses img instead of rgb_img
             masked_img = cv2.bitwise_and(img, img, mask=mask)
+            
+            image_message = self.bridge.cv2_to_imgmsg(masked_img, encoding = "passthrough")
+            self.mask_publisher.publish(image_message)
 
             contours = find_contours(mask)
             if contours:
