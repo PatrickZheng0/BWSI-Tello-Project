@@ -27,7 +27,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                cv2.imwrite('Separate segmentation/screenshot_img.jpg', img)
+                cv2.imwrite('separate_segmentation/screenshot_img.jpg', img)
                 screenshotted = True
                 break
     # if a screenshot was taken and saved, breaks out of loop
