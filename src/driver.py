@@ -79,6 +79,8 @@ if __name__ == '__main__':
         pygame.display.set_mode(size=(300, 300))
 
         driver.init_tello()
+        driver.tello.takeoff()
+        driver.tello.move_up(50)
 
         while not rospy.is_shutdown():
             for event in pygame.event.get():
