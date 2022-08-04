@@ -1,0 +1,3 @@
+<launch>
+  <node name="startup" pkg="just_drone" type="startup.py" output="screen" />
+</launch>

@@ -1,0 +1,3 @@
+<launch>
+  <node name="tv" pkg="just_drone" type="tv.py" output="screen" />
+</launch>
