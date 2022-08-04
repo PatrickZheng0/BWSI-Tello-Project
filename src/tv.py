@@ -6,7 +6,6 @@ from geometry_msgs.msg import Twist
 import numpy as np
 import cv2
 from just_drone.msg import Dimensions
-import time
 from cv_bridge import CvBridge, CvBridgeError
 
 

@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
 import sys
-import time
 
 import rospy
 from std_msgs.msg import Empty
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 from djitellopy import Tello
-import cv2
 from cv_bridge import CvBridge, CvBridgeError # for converting from cv2 to ros image
 from just_drone.msg import Dimensions
 import pygame # for emergency land

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
  
 import rospy
-from std_msgs.msg import Empty
 from just_drone.msg import Dimensions
 import time
 

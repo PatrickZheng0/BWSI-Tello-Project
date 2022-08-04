@@ -7,7 +7,7 @@ import numpy as np
 import cv2
 import time # for automatic landing timeout
 from just_drone.msg import Dimensions
-from cv_bridge import CvBridge, CvBridgeError
+from cv_bridge import CvBridge
 
 
 class PID:
