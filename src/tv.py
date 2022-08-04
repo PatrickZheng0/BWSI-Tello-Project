@@ -31,12 +31,6 @@ def get_largest_contour(contours):
     return greatest_contour, index
 
 
-def get_dist_to_tv(tv_height_pxls, tv_height):
-    # focal length = 920 for mm, 92 for cm
-    # uses pinhole camera model
-    return 92*tv_height_pxls/tv_height
-
-
 class Tv:
     def __init__(self):
         rospy.init_node('tv', anonymous=True)
@@ -51,20 +45,24 @@ class Tv:
         self.cam_sub = rospy.Subscriber('tello/camera', Image, self.cam_callback)
         self.start_sub = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
         
-    def publish_tv_cmd(self):
-        tv_msg = Twist(0,0,0,0) # replace with code to get velocity based on tv position
+    def publish_tv_cmd(self, lr, fb, ud, yaw):
+        tv_msg = Twist() # replace with code to get velocity based on hand position
+        tv_msg.linear.x = lr
+        tv_msg.linear.y = fb
+        tv_msg.linear.z = ud
+        tv_msg.angular.z = yaw
         self.tv_pub.publish(tv_msg)
 
     def cam_callback(self, data):  
         # Read the image and make a grayscale version of it      
         img = self.bridge.imgmsg_to_cv2(data, encoding='bgr8')
-        gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Make a copy of the image to crop later
         cropped_img = img.copy()
 
         # Filter out the brighter pixels from the TV and create a contour for it
-        ret, img_thresh = cv2.threshold(gray_img, 100, 255, cv2.THRESH_BINARY)
+        ret, img_thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
         contours, hierarchy = cv2.findContours(img_thresh, cv2.RETR_TREE,
                                             cv2.CHAIN_APPROX_SIMPLE)
 
@@ -86,9 +84,86 @@ class Tv:
         cropped_img[:, :x] = 0
         cropped_img[:, x + w:] = 0
 
-        # gets distance from drone to tv
-        dist = get_dist_to_tv(h, self.tv_height)
-        print(dist)
+        # find rotation vector to turn camera to face tv
+        camera_matrix = np.array([[921.170702, 0.000000, 459.904354],
+                                [0.000000, 919.018377, 351.238301],
+                                [0.000000, 0.000000, 1.000000]])
+        distortion = np.array([-0.033458, 0.105152,
+                            0.001256, -0.006647, 0.000000])
+
+        # initializes arrays of 3d points of tv corners
+        # where (0,0,0) is center of tv screen
+        tv_pts_3d = np.array([
+                            [-self.tv_width/2, self.tv_height/2, 0],
+                            [self.tv_width/2, self.tv_height/2, 0],
+                            [self.tv_width/2, -self.tv_height/2, 0],
+                            [-self.tv_width/2, -self.tv_height/2, 0]
+                            ])
+        # initializes array of 2d points of corners of tv
+        # where (0,0) is top left of image taken from tello
+        tv_pts_2d = np.array([
+                            [y, x],
+                            [y, x+w],
+                            [y+h, x+w],
+                            [y+h, x]],
+                            dtype=np.float32)
+        ret, rvec, tvec = cv2.solvePnP(tv_pts_3d, tv_pts_2d, camera_matrix, 
+                                        distortion, flags=cv2.SOLVEPNP_IPPE)
+
+        # obtain yaw_error from rotation vector
+        yaw_error = rvec[2][0]
+        # obtain distance from translation vector
+        dist = tvec[2][0]
+
+
+        # tv controls based on if drone is outside bounding rectangle borders
+
+        # drone is too far from the screen, should go forward
+        if dist > 205:
+            fb_dir = 1 # forward back direction
+        # drone is too close to screen, should move back
+        elif dist < 195:
+            fb_dir = -1
+        # drone is in good spot, don't move
+        else:
+            fb_dir = 0
+
+        # if drone center is too far left of left
+        # rectangle wall then move to the right
+        if x > 480:
+            lr_dir = 1 # left right direction
+        # if drone center is too far right of right
+        # rectangle wall then move to the left
+        elif (x + w) < 480:
+            lr_dir = -1
+        # drone is in good spot, don't need to follow tv control
+        else:
+            lr_dir = 0
+
+        # if drone center is too far down of bottom
+        # rectangle wall then move up
+        if (y + h) > 350:
+            ud_dir = 1 # up down direction
+        # if drone center is too far up of top
+        # rectangle wall then move down
+        elif y < 350:
+            ud_dir = -1
+        # drone is in good spot, don't need to follow tv control
+        else:
+            ud_dir = 0
+
+        # drone is turned to the right, turn left
+        if yaw_error > 3:
+            yaw_dir = -1 # yaw direction
+        # drone is turned to the left, turn right
+        elif yaw_error < -3:
+            yaw_dir = 1
+        # drone is in good spot, don't move
+        else:
+            yaw_dir = 0
+        
+        tv.publish_tv_cmd(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
+        # tello.send_rc_control(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
 
         try:
             self.tv_cam_pub.publish(
