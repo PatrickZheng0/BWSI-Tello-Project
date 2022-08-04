@@ -103,7 +103,7 @@ if __name__ == '__main__':
             else:
                 z = driver.tv_cmd[2]
             yaw = driver.tv_cmd[3]
-            driver.tello.send_rc_control(y,x,z,yaw)
+            driver.tello.send_rc_control(x,y,z,yaw)
 
         driver.tello.send_rc_control(0, 0, 0, 0)
         driver.tello.land()
