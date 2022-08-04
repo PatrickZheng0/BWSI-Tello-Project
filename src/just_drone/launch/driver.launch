@@ -1,3 +1,0 @@
-<launch>
-  <node name="driver" pkg="just_drone" type="driver.py" output="screen" />
-</launch>

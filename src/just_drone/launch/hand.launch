@@ -1,3 +1,0 @@
-<launch>
-  <node name="hand" pkg="just_drone" type="hand.py" output="screen" />
-</launch>
