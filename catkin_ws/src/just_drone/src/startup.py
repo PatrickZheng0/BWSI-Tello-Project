@@ -3,6 +3,7 @@
 import rospy
 from std_msgs.msg import Empty
 from just_drone.msg import Dimensions
+import time
 
 
 class Startup:
@@ -20,6 +21,7 @@ class Startup:
 
 if __name__ == '__main__':
     try:
+        time.sleep(1)
         print("\nStartup node running...\n")
         startup = Startup()
         while True:
@@ -35,7 +37,7 @@ if __name__ == '__main__':
                 break
             except ValueError:
                 print("Error: Please input a number.")
-              
+
         sound = True # delete when adding sound takeoff
         while not rospy.is_shutdown():
             if sound: # check for start sound
