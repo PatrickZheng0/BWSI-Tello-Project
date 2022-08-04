@@ -1,2 +1,2 @@
-# BWSI-Tello-Project
-Just Drone
+# Just Drone
+Final project for BWSI UAV course
