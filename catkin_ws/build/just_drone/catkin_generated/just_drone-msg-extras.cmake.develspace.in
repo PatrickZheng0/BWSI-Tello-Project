@@ -1,2 +1,0 @@
-set(just_drone_MESSAGE_FILES "/home/ericvo/BWSI-Tello-Project/catkin_ws/src/just_drone/msg/Dimensions.msg")
-set(just_drone_SERVICE_FILES "")

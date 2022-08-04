@@ -1,8 +1,0 @@
-prefix=/home/ericvo/BWSI-Tello-Project/catkin_ws/install
-
-Name: just_drone
-Description: Description of just_drone
-Version: 0.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime
