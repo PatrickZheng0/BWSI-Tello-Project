@@ -142,11 +142,11 @@ class Tv:
 
         # if drone center is too far down of bottom
         # rectangle wall then move up
-        if (y + h) > 350:
+        if (y + h) > 360:
             ud_dir = 1 # up down direction
         # if drone center is too far up of top
         # rectangle wall then move down
-        elif y < 350:
+        elif y < 360:
             ud_dir = -1
         # drone is in good spot, don't need to follow tv control
         else:
