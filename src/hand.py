@@ -7,7 +7,7 @@ import numpy as np
 import cv2
 import time # for automatic landing timeout
 from just_drone.msg import Dimensions
-from cv_bridge import CvBridge, CvBridgeError
+from cv_bridge import CvBridge
 
 
 class PID:
@@ -126,10 +126,16 @@ class Hand:
         self.bridge = CvBridge()
 
         self.start = False
+        self.start_time = time.time()
+
+        # hand color range - will change for different videos/dancers
+        self.hsv_lower = np.array((25, 150, 200))
+        self.hsv_upper = np.array((35, 255, 255))
 
         self.hand_publisher = rospy.Publisher('tello/hand_cmd', Twist, queue_size=10)
         self.tv_cam_subscriber = rospy.Subscriber('tello/tv_cam', Image, self.tv_cam_callback)
         self.start_subscriber = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
+        self.mask_publisher = rospy.Publisher('tello/mask', Image, queue_size=10)
         
     def publish_hand_cmd(self, lr, fb, ud, yaw):
         hand_msg = Twist() # replace with code to get velocity based on hand position
@@ -141,16 +147,19 @@ class Hand:
 
     def tv_cam_callback(self, data):
         curr = time.time()
-        if curr - start >= wait_time: # only process and image specified number of times per second
-            img = self.bridge.imgmsg_to_cv2(data, encoding='bgr8')
+        if curr - self.start_time >= wait_time: # only process and image specified number of times per second
+            img = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
 
             hsv_img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
 
             # remove other colors
             mask = np.empty(img.shape)
-            mask = cv2.inRange(hsv_img, hsv_lower, hsv_upper, mask)
+            mask = cv2.inRange(hsv_img, self.hsv_lower, self.hsv_upper, mask)
             # since tello drone gets image in rgb, bitwise_and uses img instead of rgb_img
             masked_img = cv2.bitwise_and(img, img, mask=mask)
+            
+            image_message = self.bridge.cv2_to_imgmsg(masked_img, encoding = "passthrough")
+            self.mask_publisher.publish(image_message)
 
             contours = find_contours(mask)
             if contours:
@@ -166,7 +175,7 @@ class Hand:
                 hand.publish_hand_cmd(0, 0, 0, 0)
                 # tello.send_rc_control(0, 0, 0, 0)
             
-            start = time.time()
+            self.start_time = time.time()
 
     def start_callback(self, data):
         self.start = True
@@ -177,18 +186,14 @@ if __name__ == '__main__':
         hand = Hand()
         fps = 4 # number of images to process per second
         wait_time = 1/fps # time between images
-
+        
         while not hand.start:
             pass
         
-        # hand color range - will change for different videos/dancers
-        hsv_lower = np.array((25, 150, 200))
-        hsv_upper = np.array((35, 255, 255))
 
         # initalize PID
         hand_pid = PID(P=0.1, I=0.0, D=0.0)
         hand_pid.set_sample_time(wait_time)
-        start = time.time()
         print("Hand node running...")
 
         rospy.spin()

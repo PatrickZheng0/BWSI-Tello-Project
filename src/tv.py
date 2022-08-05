@@ -6,7 +6,6 @@ from geometry_msgs.msg import Twist
 import numpy as np
 import cv2
 from just_drone.msg import Dimensions
-import time
 from cv_bridge import CvBridge, CvBridgeError
 
 
@@ -38,6 +37,7 @@ class Tv:
         self.start = False
         self.tv_width = 0
         self.tv_height = 0
+        self.distance = 100
         self.bridge = CvBridge()
 
         self.tv_pub = rospy.Publisher('tello/tv_cmd', Twist, queue_size=10)
@@ -55,11 +55,13 @@ class Tv:
 
     def cam_callback(self, data):  
         # Read the image and make a grayscale version of it      
-        img = self.bridge.imgmsg_to_cv2(data, encoding='bgr8')
+        img = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Make a copy of the image to crop later
         cropped_img = img.copy()
+
+        gray = cv2.GaussianBlur(gray, (7,7), cv2.BORDER_DEFAULT)
 
         # Filter out the brighter pixels from the TV and create a contour for it
         ret, img_thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
@@ -70,10 +72,11 @@ class Tv:
         # by takng the largest contour
         biggest_contour, idx = get_largest_contour(contours)
         largest_contour = cv2.drawContours(img, contours, idx, (255, 0, 255), 3)
+        bounding_img = largest_contour.copy()
 
         # Draw a bounding box around the contour
         x, y, w, h = cv2.boundingRect(biggest_contour)
-        cv2.rectangle(largest_contour, (x, y), (x + w, y + h), (255, 0, 0), 5)
+        cv2.rectangle(bounding_img, (x, y), (x + w, y + h), (255, 0, 0), 5)
 
         # Crop the image to get rid of noise for future color segmentation
         crop_ratio = 0.25
@@ -113,16 +116,25 @@ class Tv:
         # obtain yaw_error from rotation vector
         yaw_error = rvec[2][0]
         # obtain distance from translation vector
+
         dist = tvec[2][0]
+        print(dist)
 
 
         # tv controls based on if drone is outside bounding rectangle borders
 
         # drone is too far from the screen, should go forward
-        if dist > 205:
+
+        if dist > 130:
             fb_dir = 1 # forward back direction
         # drone is too close to screen, should move back
-        elif dist < 195:
+        elif dist < 115:
+            fb_dir = -1
+
+        if dist > self.distance+5:
+            fb_dir = 1 # forward back direction
+        # drone is too close to screen, should move back
+        elif dist < self.distance-5:
             fb_dir = -1
         # drone is in good spot, don't move
         else:
@@ -142,11 +154,11 @@ class Tv:
 
         # if drone center is too far down of bottom
         # rectangle wall then move up
-        if (y + h) > 360:
+        if (y + h) < 360:
             ud_dir = 1 # up down direction
         # if drone center is too far up of top
         # rectangle wall then move down
-        elif y < 360:
+        elif y > 360:
             ud_dir = -1
         # drone is in good spot, don't need to follow tv control
         else:
@@ -162,19 +174,23 @@ class Tv:
         else:
             yaw_dir = 0
         
+
         tv.publish_tv_cmd(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
         # tello.send_rc_control(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
 
         try:
             self.tv_cam_pub.publish(
-                self.bridge.cv2_to_imgmsg(data, encoding='bgr8')
+                self.bridge.cv2_to_imgmsg(cropped_img, encoding='bgr8')
+    #            self.bridge.cv2_to_imgmsg(bounding_img, encoding='bgr8')
             )
+
         except CvBridgeError as e:
             rospy.logerr(e)
 
     def start_callback(self, data):
         self.tv_width = data.width
         self.tv_height = data.height
+        self.distance = data.distance
         self.start = True
 
 

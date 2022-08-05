@@ -7,3 +7,4 @@ int8 s_lower
 int8 s_higher
 int8 v_lower
 int8 v_higher
+float32 distance

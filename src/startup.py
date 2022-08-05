@@ -1,7 +1,7 @@
 #!/usr/bin/python3
  
+from tracemalloc import start
 import rospy
-from std_msgs.msg import Empty
 from just_drone.msg import Dimensions
 import time
 from djitellopy import Tello
@@ -17,11 +17,12 @@ class Startup:
         self.start_publisher = rospy.Publisher('tello/start', Dimensions,
                                                queue_size=1)
         
-    def publish_start(self, w, h, hsv_lower, hsv_higher):
+    def publish_start(self, w, h, d, hsv_lower, hsv_higher):
         start_msg = Dimensions()
         start_msg.width = w
         start_msg.height = h
-
+        start_msg.distance = d
+        
         start_msg.h_lower = hsv_lower[0]
         start_msg.s_lower = hsv_lower[1]
         start_msg.v_lower = hsv_lower[2]
@@ -40,15 +41,25 @@ if __name__ == '__main__':
         startup = Startup()
         while True:
             try:
-                tv_width = float(input("\nInput TV width in inches: "))
+                tv_width = float(input("\nInput TV width in cm: "))
                 break
             except ValueError:
                 print("Error: Please input a number.")
 
         while True:    
             try:
-                tv_height = float(input("\nInput TV height in inches: "))
+                tv_height = float(input("\nInput TV height in cm: "))
                 break
+            except ValueError:
+                print("Error: Please input a number.")
+        
+        while True:    
+            try:
+                tv_distance = float(input("\nInput desired distance from TV in cm: "))
+                if tv_distance < 50:
+                    print("Error: Distance must be at least 50 cm.")
+                else:
+                    break
             except ValueError:
                 print("Error: Please input a number.")
 
@@ -150,7 +161,7 @@ if __name__ == '__main__':
         sound = True # delete when adding sound takeoff
         while not rospy.is_shutdown():
             if sound: # check for start sound
-                startup.publish_start(tv_width, tv_height, hsv_lower, hsv_upper)
+                startup.publish_start(tv_width, tv_height, tv_distance, hsv_lower, hsv_upper)
                 break
         print("\nStartup node finished\n")
     except rospy.ROSInterruptException:

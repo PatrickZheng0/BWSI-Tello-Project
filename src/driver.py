@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
 import sys
-import time
 
 import rospy
 from std_msgs.msg import Empty
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 from djitellopy import Tello
-import cv2
 from cv_bridge import CvBridge, CvBridgeError # for converting from cv2 to ros image
 from just_drone.msg import Dimensions
 import pygame # for emergency land
@@ -81,6 +79,8 @@ if __name__ == '__main__':
         pygame.display.set_mode(size=(300, 300))
 
         driver.init_tello()
+        driver.tello.takeoff()
+        driver.tello.move_up(20)
 
         while not rospy.is_shutdown():
             for event in pygame.event.get():
@@ -97,13 +97,17 @@ if __name__ == '__main__':
                 x = driver.hand_cmd[0]
             else:
                 x = driver.tv_cmd[0]
+            
             y = driver.tv_cmd[1]
+
             if driver.tv_cmd[2] == 0:
                 z = driver.hand_cmd[2]
             else:
                 z = driver.tv_cmd[2]
+
             yaw = driver.tv_cmd[3]
-            driver.tello.send_rc_control(x,y,z,yaw)
+
+            driver.tello.send_rc_control(round(x),round(y),round(z),round(yaw))
 
         driver.tello.send_rc_control(0, 0, 0, 0)
         driver.tello.land()
