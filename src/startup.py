@@ -1,12 +1,12 @@
 #!/usr/bin/python3
+
+import sys
  
-from tracemalloc import start
 import rospy
 from just_drone.msg import Dimensions
 import time
 from djitellopy import Tello
 import cv2
-from cv_bridge import CvBridge, CvBridgeError # for converting from cv2 to ros image
 import pygame
 import numpy as np
 
@@ -95,6 +95,9 @@ if __name__ == '__main__':
                         cv2.imwrite('screenshot_img.jpg', img)
                         screenshotted = True
                         break
+                elif event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
             # if a screenshot was taken and saved, breaks out of loop
             if screenshotted:
                 break
