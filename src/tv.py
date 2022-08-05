@@ -116,6 +116,7 @@ class Tv:
         # obtain yaw_error from rotation vector
         yaw_error = rvec[2][0]
         # obtain distance from translation vector
+
         dist = tvec[2][0]
         print(dist)
 
@@ -123,17 +124,17 @@ class Tv:
         # tv controls based on if drone is outside bounding rectangle borders
 
         # drone is too far from the screen, should go forward
-<<<<<<< HEAD
+
         if dist > 130:
             fb_dir = 1 # forward back direction
         # drone is too close to screen, should move back
         elif dist < 115:
-=======
+            fb_dir = -1
+
         if dist > self.distance+5:
             fb_dir = 1 # forward back direction
         # drone is too close to screen, should move back
         elif dist < self.distance-5:
->>>>>>> 1f7220ddf45935914baabf8697529bc235066b79
             fb_dir = -1
         # drone is in good spot, don't move
         else:
