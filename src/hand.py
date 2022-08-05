@@ -129,12 +129,12 @@ class Hand:
         self.start_time = time.time()
 
         # hand color range - will change for different videos/dancers
-        self.hsv_lower = np.array((25, 150, 200))
-        self.hsv_upper = np.array((35, 255, 255))
+        self.hsv_lower = None
+        self.hsv_upper = None
 
+        self.start_subscriber = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
         self.hand_publisher = rospy.Publisher('tello/hand_cmd', Twist, queue_size=10)
         self.tv_cam_subscriber = rospy.Subscriber('tello/tv_cam', Image, self.tv_cam_callback)
-        self.start_subscriber = rospy.Subscriber('tello/start', Dimensions, self.start_callback)
         self.mask_publisher = rospy.Publisher('tello/mask', Image, queue_size=10)
         
     def publish_hand_cmd(self, lr, fb, ud, yaw):
@@ -144,6 +144,11 @@ class Hand:
         hand_msg.linear.z = ud
         hand_msg.angular.z = yaw
         self.hand_publisher.publish(hand_msg)
+
+    def start_callback(self, data):
+        self.start = True
+        self.hsv_lower = np.array((data.h_lower, data.s_lower, data.v_lower))
+        self.hsv_upper = np.array((data.h_higher, data.s_higher, data.v_higher))
 
     def tv_cam_callback(self, data):
         curr = time.time()
@@ -176,9 +181,6 @@ class Hand:
                 # tello.send_rc_control(0, 0, 0, 0)
             
             self.start_time = time.time()
-
-    def start_callback(self, data):
-        self.start = True
 
 
 if __name__ == '__main__':
