@@ -37,7 +37,6 @@ class Tv:
         self.start = False
         self.tv_width = 0
         self.tv_height = 0
-        self.distance = 100
         self.bridge = CvBridge()
 
         self.tv_pub = rospy.Publisher('tello/tv_cmd', Twist, queue_size=10)
@@ -123,17 +122,10 @@ class Tv:
         # tv controls based on if drone is outside bounding rectangle borders
 
         # drone is too far from the screen, should go forward
-<<<<<<< HEAD
         if dist > 130:
             fb_dir = 1 # forward back direction
         # drone is too close to screen, should move back
         elif dist < 115:
-=======
-        if dist > self.distance+5:
-            fb_dir = 1 # forward back direction
-        # drone is too close to screen, should move back
-        elif dist < self.distance-5:
->>>>>>> 1f7220ddf45935914baabf8697529bc235066b79
             fb_dir = -1
         # drone is in good spot, don't move
         else:
@@ -189,7 +181,6 @@ class Tv:
     def start_callback(self, data):
         self.tv_width = data.width
         self.tv_height = data.height
-        self.distance = data.distance
         self.start = True
 
 

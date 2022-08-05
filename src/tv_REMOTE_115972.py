@@ -123,17 +123,10 @@ class Tv:
         # tv controls based on if drone is outside bounding rectangle borders
 
         # drone is too far from the screen, should go forward
-<<<<<<< HEAD
-        if dist > 130:
-            fb_dir = 1 # forward back direction
-        # drone is too close to screen, should move back
-        elif dist < 115:
-=======
         if dist > self.distance+5:
             fb_dir = 1 # forward back direction
         # drone is too close to screen, should move back
         elif dist < self.distance-5:
->>>>>>> 1f7220ddf45935914baabf8697529bc235066b79
             fb_dir = -1
         # drone is in good spot, don't move
         else:
@@ -173,14 +166,17 @@ class Tv:
         else:
             yaw_dir = 0
         
+        print(y+h, "y+h")
+        print(y, "y")
+        print(bounding_img.shape, "shape")
 
         tv.publish_tv_cmd(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
         # tello.send_rc_control(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
 
         try:
             self.tv_cam_pub.publish(
-                self.bridge.cv2_to_imgmsg(cropped_img, encoding='bgr8')
-    #            self.bridge.cv2_to_imgmsg(bounding_img, encoding='bgr8')
+    #            self.bridge.cv2_to_imgmsg(cropped_img, encoding='bgr8')
+                self.bridge.cv2_to_imgmsg(bounding_img, encoding='bgr8')
             )
 
         except CvBridgeError as e:
