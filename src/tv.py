@@ -80,10 +80,12 @@ class Tv:
 
         # Crop the image to get rid of noise for future color segmentation
         crop_ratio = 0.25
+        bottom_ratio = 0.15
         ratio = int(crop_ratio*h)
+        ratio1 = int(bottom_ratio*h)
 
         cropped_img[:y + ratio, :] = 0
-        cropped_img[y + h - ratio:, :] = 0
+        cropped_img[y + h - ratio1:, :] = 0
         cropped_img[:, :x] = 0
         cropped_img[:, x + w:] = 0
 

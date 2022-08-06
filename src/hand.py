@@ -11,7 +11,7 @@ from cv_bridge import CvBridge
 
 
 class PID:
-    def __init__(self, P=0.2, I=0.0, D=0.0, current_time=None):
+    def __init__(self, P=0.1, I=0.0, D=0.0, current_time=None):
         # set K values
         self.Kp = P
         self.Ki = I
@@ -43,6 +43,9 @@ class PID:
         errorX = cX - (w/2) # x error from center of camera
         errorY = cY - (h/2) # y error from center of camera
 
+        print("error in x: ", errorX)
+        print("error in y: ", errorY)
+
         self.current_time = current_time if current_time is not None else time.time()
         delta_t = self.current_time - self.last_time # elapsed time
                 
@@ -60,7 +63,10 @@ class PID:
             
             # update velocities
             Vx = Px + (self.Ki * Ix) + Dx
+            Vx = min(Vx, 20)
+
             Vy = Py + (self.Ki * Iy) + Dy
+            Vy = min(Vy, 20)
 
             #print(errorX)
             #print(errorY)
