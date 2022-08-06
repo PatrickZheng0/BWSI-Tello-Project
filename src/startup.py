@@ -140,6 +140,7 @@ if __name__ == '__main__':
         cv2.setMouseCallback('image', color_picker)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
+        tello.end()
         # color_picker end ----------------------------------------------------
 
         sound = True # delete when adding sound takeoff
