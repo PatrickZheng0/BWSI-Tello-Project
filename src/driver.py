@@ -9,7 +9,7 @@ from geometry_msgs.msg import Twist
 from djitellopy import Tello
 from cv_bridge import CvBridge, CvBridgeError # for converting from cv2 to ros image
 from just_drone.msg import Dimensions
-import pygame # for emergency land
+#import pygame # for emergency land
 
 
 class Driver:
@@ -75,21 +75,17 @@ if __name__ == '__main__':
         
         print("Driver Node running...")
 
-        pygame.init()
-        pygame.display.set_mode(size=(300, 300))
+        #pygame.init()
+        #pygame.display.set_mode(size=(300, 300))
 
         driver.init_tello()
         driver.tello.takeoff()
         driver.tello.move_up(20)
 
         while not rospy.is_shutdown():
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        driver.stop = True
-                        break
-                if event.type == pygame.QUIT:
-                    break
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('space'):
+                break
             if driver.stop:
                 break
             driver.publish_video()
@@ -111,7 +107,7 @@ if __name__ == '__main__':
 
         driver.tello.send_rc_control(0, 0, 0, 0)
         driver.tello.land()
-        pygame.quit()
+        #pygame.quit()
         sys.exit()
     except rospy.ROSInterruptException:
         pass
