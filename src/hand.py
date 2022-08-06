@@ -64,9 +64,11 @@ class PID:
             # update velocities
             Vx = Px + (self.Ki * Ix) + Dx
             Vx = min(Vx, 20)
+            Vx = max(Vx,-20)
 
             Vy = Py + (self.Ki * Iy) + Dy
             Vy = min(Vy, 20)
+            Vy = max(Vy,-20)
 
             #print(errorX)
             #print(errorY)
@@ -200,7 +202,7 @@ if __name__ == '__main__':
         
 
         # initalize PID
-        hand_pid = PID(P=0.1, I=0.0, D=0.0)
+        hand_pid = PID(P=0.2, I=0.0, D=0.0)
         hand_pid.set_sample_time(wait_time)
         print("Hand node running...")
 

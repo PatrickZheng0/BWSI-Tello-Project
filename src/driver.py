@@ -87,7 +87,8 @@ if __name__ == '__main__':
 
         while not rospy.is_shutdown():
             key = cv2.waitKey(1) & 0xFF
-            if key == ord(' '):
+            if key == 32:
+                print("me worked!")
                 break
             if driver.stop:
                 break
