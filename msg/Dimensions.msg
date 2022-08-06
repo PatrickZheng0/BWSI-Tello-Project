@@ -2,9 +2,9 @@ float32 width
 float32 height
 float32 distance
 
-int8 h_lower
-int8 h_higher
-int8 s_lower
-int8 s_higher
-int8 v_lower
-int8 v_higher
+int32 h_lower
+int32 h_higher
+int32 s_lower
+int32 s_higher
+int32 v_lower
+int32 v_higher

@@ -126,16 +126,16 @@ class Tv:
         # drone is too far from the screen, should go forward
 
         if dist > 130:
-            fb_dir = 1 # forward back direction
+            fb_dir = 0 # forward back direction
         # drone is too close to screen, should move back
         elif dist < 115:
-            fb_dir = -1
+            fb_dir = 0
 
         if dist > self.distance+5:
-            fb_dir = 1 # forward back direction
+            fb_dir = 0 # forward back direction
         # drone is too close to screen, should move back
         elif dist < self.distance-5:
-            fb_dir = -1
+            fb_dir = 0
         # drone is in good spot, don't move
         else:
             fb_dir = 0
@@ -175,7 +175,7 @@ class Tv:
             yaw_dir = 0
         
 
-        tv.publish_tv_cmd(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
+        tv.publish_tv_cmd(lr_dir*10, fb_dir*0, ud_dir*10, yaw_dir*5)
         # tello.send_rc_control(lr_dir*10, fb_dir*7, ud_dir*10, yaw_dir*5)
 
         try:
